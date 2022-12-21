@@ -13,7 +13,7 @@ authors = [{ name = "redoxcode", email = "redoxcode@github.com" }]
 license = { file = "LICENSE" }
 classifiers = [
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Micropython"
+    "Programming Language :: Python :: Implementation :: MicroPython"
 ]
 keywords = ["PPM", "reader", "rc", "remote", "receiver"]
 dependencies = []
