@@ -1,0 +1,27 @@
+# pyproject.toml
+
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "micropython-ppm_reader"
+version = "1.0.0"
+description = "Decodes PPM signals from RC receivers"
+readme = "README.md"
+authors = [{ name = "redoxcode", email = "redoxcode@github.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Micropython"
+]
+keywords = ["PPM", "reader", "rc", "remote", "receiver"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = []
+
+[project.urls]
+Homepage = "https://github.com/redoxcode/micropython-ppm_reader"
+
+
