@@ -84,7 +84,7 @@ class PpmReader:
         return values
 
     def get_value_bi(self,channel):
-        return self.get_value_uni(channel)*2.0-1.0
+        return self.get_value(channel)*2.0-1.0
     
     def guess_channel_count(self):
         return self.last_packet_length
