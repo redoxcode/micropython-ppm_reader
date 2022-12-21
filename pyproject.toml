@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "micropython-ppm_reader"
-version = "1.0.0"
+version = "1.0.1"
 description = "Decodes PPM signals from RC receivers"
 readme = "README.md"
 authors = [{ name = "redoxcode", email = "redoxcode@github.com" }]
