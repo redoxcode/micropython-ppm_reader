@@ -1,4 +1,4 @@
-# Description
+## Description
 A micropython library to decode PPM signals comming from a RC receiver (as used for rc planes and drones).
 
 This library is focused on savety and includes functions that can be used to detect a faulty or lost signal.
@@ -6,15 +6,49 @@ This library is focused on savety and includes functions that can be used to det
 
 Created for the use with pi pico, but should work on other boards as well.
 
-# Api
-```class PpmReader(pin_id,channels,min_value=1000,max_value=2000,packet_gap=4000)```
+## Examples
+
+### Print the values of all channels
+```Python
+from ppm_reader import PpmReader
+ppm_pin_id=28
+ppm_channels=8
+ppmReader=PpmReader(ppm_pin_id,ppm_channels)
+while True:
+    time.sleep(0.5)
+    print(ppmReader.get_values())
+```
+### Find the number of channels
+```Python
+# the number of channels should be known before you init PpmReader
+# if the channel number is incorrect only guess_channel_count will work
+from ppm_reader import PpmReader
+ppm_pin_id=28
+ppmReader=PpmReader(ppm_pin_id,channels=0)
+while True:
+time.sleep(0.5)
+print(ppmReader.guess_channel_count())
+```
+### Find values for min_value and max_value
+```Python
+# move the controls to the extreme positions and observe the values
+from ppm_reader import PpmReader
+ppm_pin_id=28
+ppm_channels=8
+ppmReader=PpmReader(ppm_pin_id,ppm_channels)
+while True:
+time.sleep(0.5)
+print(ppmReader.get_raw_values())
+```
+## Api
+### class PpmReader(pin_id,channels,min_value=1000,max_value=2000,packet_gap=4000)
 - pin_id: GPIO pin connected to the PPM signal comming from the RC receiver.
 - channels: Number of channels in the PPM signal. if the channel count is wrong the packts will be considered invalid.       
 - min_value: Minimum timeframe per channel in us (this should be around 1000us for standard equipment).
 - max_value: Minimum timeframe per channel in us (this should be around 2000us for standard equipment).   
 - packet_gap: Minimum time gap between packets in us (4000us should be used for standard equipment).
 
-```PpmReader.time_since_last_packet()```
+```time_since_last_packet()```
 - returns the time passed since the last valid packet arrived in us
 
 ```get_valid_packets()```
