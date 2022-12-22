@@ -5,6 +5,7 @@ This library is focused on savety and includes functions that can be used to det
 **For this it is required to init the PpmReader class with the correct number of channels in the PPM signal. This might be a different number than the amount of servo connectors on the RC receiver hardware!**
 
 Created for the use with pi pico, but should work on other boards as well.
+You can find the [API documentation](https://github.com/redoxcode/micropython-ppm_reader/#API) and a few [examples](https://github.com/redoxcode/micropython-ppm_reader/#Examples) below.
 
 ## Examples
 
@@ -20,27 +21,57 @@ while True:
 ```
 ### Find the number of channels
 ```Python
-# the number of channels should be known before you init PpmReader
-# if the channel number is incorrect only guess_channel_count will work
+#the number of channels should be known before you init PpmReader
+#if the channel number is incorrect only guess_channel_count will work
 from ppm_reader import PpmReader
 ppm_pin_id=28
 ppmReader=PpmReader(ppm_pin_id,channels=0)
 while True:
-time.sleep(0.5)
-print(ppmReader.guess_channel_count())
+    time.sleep(0.5)
+    print(ppmReader.guess_channel_count())
 ```
 ### Find values for min_value and max_value
 ```Python
-# move the controls to the extreme positions and observe the values
+#move the controls to the extreme positions and observe the values
 from ppm_reader import PpmReader
 ppm_pin_id=28
 ppm_channels=8
 ppmReader=PpmReader(ppm_pin_id,ppm_channels)
 while True:
-time.sleep(0.5)
-print(ppmReader.get_raw_values())
+    time.sleep(0.5)
+    print(ppmReader.get_raw_values())
 ```
-## Api
+### Check for a loss of signal
+```Python
+from ppm_reader import PpmReader
+ppm_pin_id=28
+ppm_channels=8
+ppmReader=PpmReader(ppm_pin_id,ppm_channels)
+
+#wait initial connection with the remote
+while ppmReader.get_valid_packets() == 0:
+    print("waiting for connection ...")
+    time.sleep(0.5)
+print("connected.")
+
+#got signal, continue to main loop
+while True:
+    last_packet_time=ppmReader.time_since_last_packet()
+    print(last_packet_time)
+    if last_packet_time>25000: 
+        #25ms without a new packet
+        #take security measures here (for example stop all motors)
+        print("connection lost")
+        #wait for connection
+        while ppmReader.time_since_last_packet()>25000:
+            pass
+        print("connected again")
+    else:
+        #connection ok. Do something here
+        print(ppmReader.get_raw_values())
+```
+
+## API
 ### class PpmReader(pin_id,channels,min_value=1000,max_value=2000,packet_gap=4000)
 - pin_id: GPIO pin connected to the PPM signal comming from the RC receiver.
 - channels: Number of channels in the PPM signal. if the channel count is wrong the packts will be considered invalid.       
@@ -49,7 +80,7 @@ print(ppmReader.get_raw_values())
 - packet_gap: Minimum time gap between packets in us (4000us should be used for standard equipment).
 
 ```time_since_last_packet()```
-- returns the time passed since the last valid packet arrived in us
+- returns the time passed since the last valid packet arrived in us. This will stay below about 5000us if every packet is recived correctly. Missing 2 or 3 packets is usually not a problem.
 
 ```get_valid_packets()```
 - returns the number of valid packets received
