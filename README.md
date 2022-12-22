@@ -68,7 +68,7 @@ while True:
         print("connected again")
     else:
         #connection ok. Do something here
-        print(ppmReader.get_raw_values())
+        print(ppmReader.get_values())
 ```
 
 ## API
@@ -80,7 +80,7 @@ while True:
 - packet_gap: Minimum time gap between packets in us (4000us should be used for standard equipment).
 
 ```time_since_last_packet()```
-- returns the time passed since the last valid packet arrived in us. This will stay below about 5000us if every packet is recived correctly. Missing 2 or 3 packets is usually not a problem.
+- returns the time passed since the last valid packet arrived in us. This will stay below about 5000us if every packet is received correctly. Missing 2 or 3 packets is usually not a problem.
 
 ```get_valid_packets()```
 - returns the number of valid packets received
