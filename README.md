@@ -1,5 +1,5 @@
 ## Description
-A micropython library to decode PPM signals comming from a RC receiver (as used for rc planes and drones).
+A micropython library to decode PPM signals coming from a RC receiver (as used for rc planes and drones).
 
 This library is focused on savety and includes functions that can be used to detect a faulty or lost signal.
 **For this it is required to init the PpmReader class with the correct number of channels in the PPM signal. This might be a different number than the amount of servo connectors on the RC receiver hardware!**
