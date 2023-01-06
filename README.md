@@ -1,3 +1,4 @@
+[![pypi version shield](https://img.shields.io/pypi/v/micropython-ppm_reader)](https://pypi.org/project/micropython-ppm_reader/) [![pypi downloads per month shield](https://img.shields.io/pypi/dm/micropython-ppm_reader?color=brightgreen)](https://pypi.org/project/micropython-ppm_reader/)
 ## Description
 A micropython library to decode PPM signals coming from a RC receiver (as used for rc planes and drones).
 
