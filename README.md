@@ -8,6 +8,16 @@ This library is focused on savety and includes functions that can be used to det
 Created for the use with pi pico, but should work on other boards as well.
 You can find the [API documentation](https://github.com/redoxcode/micropython-ppm_reader/#API) and a few [examples](https://github.com/redoxcode/micropython-ppm_reader/#Examples) below.
 
+## Install
+Place the library in the **lib** folder of your device (create the folder if it doesn't exist yet).
+
+It should look like this:
+
+- **lib**
+   - **ppm_reader**
+      - **\_\_init\_\_.py**
+      - **\_\_main\_\_.py**
+
 ## Examples
 
 ### Print the values of all channels
